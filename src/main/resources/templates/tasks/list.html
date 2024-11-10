@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Список задач</h1>
+
+    <a href="/tasks/create" class="btn btn-primary">Создать новую задачу</a>
+
+    <table class="task-table">
+        <thead>
+        <tr>
+            <th>Заголовок</th>
+            <th>Описание</th>
+            <th>Статус</th>
+            <th>Возможные действия</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.title}"></td>
+                <td th:text="${task.description}"></td>
+                <td th:text="${task.status.getValue()}"></td>
+                <td>
+                    <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="btn btn-warning">Давай отредактируем</a>
+                    <a th:href="@{/tasks/delete/{id}(id=${task.id})}" class="btn btn-danger" onclick="return confirm('Вы уверены что хотите удалить задачу?')">Удалить к хуям</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<canvas class="canvas" id="canvas"></canvas>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

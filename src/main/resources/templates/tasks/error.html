@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Опачки, что-то пошло не так...</h1>
+    <p th:text="${errorMessage}">Описание ошибки</p>
+    <a href="/tasks" class="btn btn-primary">Вернуться к задачам</a>
+</div>
+
+<canvas class="canvas" id="canvas"></canvas>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
