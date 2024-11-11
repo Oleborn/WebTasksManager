@@ -17,10 +17,6 @@ public class TaskController {
     @Resource
     private TaskService taskService;
 
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;  // Внедрение сервиса
-    }
-
     @GetMapping  // Обработка GET-запроса для отображения всех задач
     public String listTasks(Model model) {
         model.addAttribute("tasks", taskService.findAll());  // Добавление всех задач в модель

@@ -1,5 +1,6 @@
 package oleborn.todospringtest.controllers.services;
 
+import jakarta.annotation.Resource;
 import oleborn.todospringtest.exceptions.InvalidTaskException;
 import oleborn.todospringtest.exceptions.TaskNotFoundException;
 import oleborn.todospringtest.model.Task;
@@ -11,12 +12,8 @@ import java.util.List;
 @Service  // Аннотация для обозначения сервиса
 public class TaskService {
 
-    private final TaskRepository taskRepository;
-
-    // Внедрение репозитория через конструктор
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    @Resource
+    private TaskRepository taskRepository;
 
     // Получение всех задач
     public List<Task> findAll() {
