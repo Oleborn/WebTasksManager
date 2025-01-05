@@ -1,6 +1,7 @@
 package oleborn.todospringtest.controllers.services;
 
 import jakarta.annotation.Resource;
+import oleborn.todospringtest.annotation.MeasureExecutionTime;
 import oleborn.todospringtest.exceptions.InvalidTaskException;
 import oleborn.todospringtest.exceptions.TaskNotFoundException;
 import oleborn.todospringtest.model.Task;
@@ -16,17 +17,20 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     // Получение всех задач
+    @MeasureExecutionTime
     public List<Task> findAll() {
         return taskRepository.findAll();  // JpaRepository автоматически находит все записи в таблице
     }
 
     // Получение задачи по ID
+    @MeasureExecutionTime
     public Task findById(Long id) {
         return taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));  // Исключение, если задача не найдена
     }
 
     // Сохранение новой задачи
+    @MeasureExecutionTime
     public Task save(Task task) {
         if (task.getTitle() == null || task.getTitle().isBlank()) {
             throw new InvalidTaskException("Task title cannot be empty");  // Исключение, если заголовок пустой
@@ -35,6 +39,7 @@ public class TaskService {
     }
 
     // Удаление задачи по ID
+    @MeasureExecutionTime
     public void deleteById(Long id) {
         if (!taskRepository.existsById(id)) {
             throw new TaskNotFoundException(id);  // Исключение, если задача не существует
