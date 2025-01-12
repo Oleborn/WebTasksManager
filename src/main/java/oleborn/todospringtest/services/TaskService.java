@@ -1,4 +1,4 @@
-package oleborn.todospringtest.controllers.services;
+package oleborn.todospringtest.services;
 
 import jakarta.annotation.Resource;
 import oleborn.todospringtest.annotation.MeasureExecutionTime;

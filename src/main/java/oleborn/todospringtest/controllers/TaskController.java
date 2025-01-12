@@ -2,7 +2,7 @@ package oleborn.todospringtest.controllers;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import oleborn.todospringtest.controllers.services.TaskService;
+import oleborn.todospringtest.services.TaskService;
 import oleborn.todospringtest.model.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

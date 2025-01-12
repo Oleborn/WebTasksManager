@@ -28,10 +28,9 @@ public class LoggingAspect {
      *
      * @param joinPoint информация о вызванном методе
      */
-    @Before("execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))")
+    @Before("execution(* oleborn.todospringtest.services.TaskService.*(..))")
     public void logMethodExecution(JoinPoint joinPoint) {
         log.info("Запущена работа метода:{}", joinPoint.getSignature().getName());
-        System.out.println("Запущена работа метода:" + joinPoint.getSignature().getName());
     }
 
     /**
@@ -40,9 +39,9 @@ public class LoggingAspect {
      * @param exception выброшенное исключение
      * @param joinPoint информация о методе, вызвавшем исключение
      */
-    @AfterThrowing(value = "execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))",
+    @AfterThrowing(value = "execution(* oleborn.todospringtest.services.TaskService.*(..))",
             throwing = "exception", argNames = "exception,joinPoint")
     public void logException(Exception exception, JoinPoint joinPoint) {
-        System.out.println("Метод " + joinPoint.getSignature().getName() + " породил ошибку: " + exception.getMessage());
+        log.info("Метод {} породил ошибку: {}", joinPoint.getSignature().getName(), exception.getMessage());
     }
 }

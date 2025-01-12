@@ -1,5 +1,6 @@
 package oleborn.todospringtest.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Around;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
+@Slf4j
 public class MeasureExecutionTimeAspect {
 
     /**
@@ -41,7 +43,7 @@ public class MeasureExecutionTimeAspect {
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();  // Выполняем метод
         long endTime = System.currentTimeMillis();
-        System.out.println("Метод " + joinPoint.getSignature().getName() + " был выполнен за: " + (endTime - startTime) + " мс");
+        log.info("Метод {} был выполнен за: {} мс", joinPoint.getSignature().getName(), endTime - startTime);
         return result;
     }
 }

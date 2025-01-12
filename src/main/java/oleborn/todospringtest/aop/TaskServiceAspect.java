@@ -1,5 +1,6 @@
 package oleborn.todospringtest.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
+@Slf4j
 public class TaskServiceAspect {
 
     /**
@@ -26,9 +28,9 @@ public class TaskServiceAspect {
      *
      * @param joinPoint объект {@link JoinPoint}, содержащий информацию о вызванном методе
      */
-    @Before("execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))")
+    @Before("execution(* oleborn.todospringtest.services.TaskService.*(..))")
     public void beforeMethod(JoinPoint joinPoint) {
-        System.out.println("Перед выполнением метода: " + joinPoint.getSignature().getName());
+        log.info("Перед выполнением метода: {}", joinPoint.getSignature().getName());
     }
 
     /**
@@ -36,9 +38,9 @@ public class TaskServiceAspect {
      *
      * @param joinPoint объект {@link JoinPoint}, содержащий информацию о вызванном методе
      */
-    @After("execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))")
+    @After("execution(* oleborn.todospringtest.services.TaskService.*(..))")
     public void afterMethod(JoinPoint joinPoint) {
-        System.out.println("После выполнения метода: " + joinPoint.getSignature().getName());
+        log.info("После выполнения метода: {}", joinPoint.getSignature().getName());
     }
 
     /**
@@ -46,9 +48,9 @@ public class TaskServiceAspect {
      *
      * @param joinPoint объект {@link JoinPoint}, содержащий информацию о вызванном методе
      */
-    @AfterReturning("execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))")
+    @AfterReturning("execution(* oleborn.todospringtest.services.TaskService.*(..))")
     public void afterReturningMethod(JoinPoint joinPoint) {
-        System.out.println("Метод успешно выполнен: " + joinPoint.getSignature().getName());
+        log.info("Метод успешно выполнен: {}", joinPoint.getSignature().getName());
     }
 
     /**
@@ -56,9 +58,9 @@ public class TaskServiceAspect {
      *
      * @param joinPoint объект {@link JoinPoint}, содержащий информацию о вызванном методе
      */
-    @AfterThrowing("execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))")
+    @AfterThrowing("execution(* oleborn.todospringtest.services.TaskService.*(..))")
     public void afterThrowingMethod(JoinPoint joinPoint) {
-        System.out.println("Метод выбросил исключение: " + joinPoint.getSignature().getName());
+        log.info("Метод выбросил исключение: {}", joinPoint.getSignature().getName());
     }
 
     /**
@@ -70,16 +72,16 @@ public class TaskServiceAspect {
      * @return результат выполнения метода
      * @throws Throwable если исходный метод выбросит исключение
      */
-    @Around("execution(* oleborn.todospringtest.controllers.services.TaskService.*(..))")
+    @Around("execution(* oleborn.todospringtest.services.TaskService.*(..))")
     public Object aroundMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         // Выводим информацию перед выполнением метода
-        System.out.println("Вокруг метода - Перед выполнением: " + joinPoint.getSignature().getName());
+        log.info("Вокруг метода - Перед выполнением: {}", joinPoint.getSignature().getName());
 
         // Выполняем метод
         Object result = joinPoint.proceed();
 
         // Выводим информацию после выполнения метода
-        System.out.println("Вокруг метода - После выполнения: " + joinPoint.getSignature().getName());
+        log.info("Вокруг метода - После выполнения: {}", joinPoint.getSignature().getName());
 
         return result;
     }

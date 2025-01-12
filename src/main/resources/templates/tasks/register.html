@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Регистрация</h1>
+
+    <!-- Выводим сообщение об ошибке, если оно есть -->
+    <div th:if="${errorMessage}" class="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <!-- Форма для регистрации -->
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" placeholder="Введите имя пользователя" required />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" placeholder="Введите пароль" required />
+        </div>
+
+        <!-- Кнопка регистрации -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </div>
+    </form>
+
+    <!-- Кнопка "Войти" -->
+    <div class="form-actions">
+        <a th:href="@{/register}" class="btn btn-secondary">Войти</a>
+    </div>
+</div>
+
+<canvas class="canvas" id="canvas"></canvas>
+<script src="/js/script.js"></script>
+
+<script>
+    // Обработчик отправки формы
+    document.getElementById('registrationForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Отменяем стандартное поведение формы
+
+        // Собираем данные из формы
+        const formData = {
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+        };
+
+        // Отправляем данные на сервер в формате JSON
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.text())
+            .then(message => {
+                alert(message); // Показываем сообщение от сервера
+                window.location.href = '/login'; // Перенаправляем на страницу входа
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
+</body>
+</html>
